@@ -3,7 +3,8 @@ import firebase from '../../../firebase'
 import AvatarEditor from 'react-avatar-editor'
 import {Grid, Header, Icon, Image,Form, Button, Input, Message, Modal} from 'semantic-ui-react'
 import {Link, useHistory} from 'react-router-dom'
-
+import Snackbar from '@material-ui/core/Snackbar'
+import Alert from '@material-ui/lab/Alert'
 class UserPanel extends React.Component{
     state={
         user:firebase.auth().currentUser,
@@ -19,6 +20,7 @@ class UserPanel extends React.Component{
         auth:firebase.auth(),
         reset:false,
         email:"",
+        open:false,
         metadata:{
             contentType: "image/png"
         }
@@ -27,7 +29,8 @@ class UserPanel extends React.Component{
     closeModal = () => this.setState({modal:false})
     openReset = () => this.setState({reset:true})
     closeReset = () => this.setState({reset:false})
-
+    openOpen = () => this.setState({open:true})
+    closeOpen = () => this.setState({open:false})
     uploadCroppedImage =() =>{
         const {storageRef, userRef, blob, metadata} = this.state
         
@@ -99,7 +102,15 @@ class UserPanel extends React.Component{
 
     handleResetPassword = event =>{
         event.preventDefault()
-        this.state.auth.sendPasswordResetEmail(this.state.email)
+        this.state.auth.sendPasswordResetEmail(this.state.email).then(()=>{
+            this.setState({open:true})
+        }).catch(err =>{
+            console.error(err)
+        }).then(()=>{
+            this.setState({reset:false})
+        }).catch(err =>{
+            console.error(err)
+        })
     }
 
     handleSignout = () => firebase.auth().signOut()
@@ -230,6 +241,11 @@ class UserPanel extends React.Component{
                             </Form>
                         </Modal.Content>
                     </Modal>
+                    <Snackbar open={this.state.open} autoHideDuration={3000} onClose={this.closeOpen}>
+                        <Alert onClose={this.closeOpen} severity="success">
+                            Email send!
+                        </Alert>
+                    </Snackbar>
                 </Grid.Column>
             </Grid>
         )
