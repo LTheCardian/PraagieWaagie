@@ -31,6 +31,13 @@ class UserPanel extends React.Component{
     closeReset = () => this.setState({reset:false})
     openOpen = () => this.setState({open:true})
     closeOpen = () => this.setState({open:false})
+
+
+    componentDidMount(){
+        console.log(this.state.user)
+    }
+
+
     uploadCroppedImage =() =>{
         const {storageRef, userRef, blob, metadata} = this.state
         
@@ -155,6 +162,14 @@ class UserPanel extends React.Component{
                                         User name:
                                         <br/>
                                         {user.displayName}
+                                        <br/>
+                                        <br/>
+                                        Email:
+                                        <br/>
+                                        {user.email}
+                                        <br/>
+                                        <br/>
+                                        Provider:
                                     </Header.Content>
                                 </Header>
                                 <Button onClick={this.openReset}>Change password</Button>
