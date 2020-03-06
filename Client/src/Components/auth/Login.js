@@ -36,6 +36,10 @@ export default class Login extends React.Component{
             console.log('Email send')
         }).catch(error =>{
             console.log(error)
+        }).then(()=>{
+            alert('Password reset email send')
+        }).catch(error =>{
+            console.error(error)
         })
     }
 
