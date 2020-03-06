@@ -207,11 +207,11 @@ class UserPanel extends React.Component{
                                     <Icon name="save"/> Change avatar
                                 </Button>
                             )}
-                            <Button color="green" inverted onClick={this.handleCropImage}>
-                                <Icon name="image" /> Preview
-                            </Button>
                             <Button color="red" inverted onClick={this.closeModal}>
                                 <Icon name="remove" /> Cancel
+                            </Button>
+                            <Button color="green" inverted onClick={this.handleCropImage}>
+                                <Icon name="image" /> Preview
                             </Button>
                         </Modal.Actions>
                     </Modal>

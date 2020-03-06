@@ -82,7 +82,7 @@ export default class Login extends React.Component{
     }
 
     logInGoogle= ()=>{
-        firebase.auth().signInWithRedirect(this.state.provider)
+        firebase.auth().signInWithPopup(this.state.provider)
         .then((result) =>{
             if(result.credential){
                 const token = result.credential.accessToken
