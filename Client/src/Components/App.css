@@ -34,7 +34,7 @@ body{
 }
 
 .avatar-text{
-  padding-left:50px!important;
+  padding-left:25px!important;
   text-decoration: underline;
   color:lightblue;
 }
@@ -44,11 +44,4 @@ body{
   padding-top:25px!important;
 }
 
-.avatar-image{
-  position: relative!important;
-  overflow:hidden!important;
-  max-width:200px!important;
-  width:100%!important;
-  max-height:200px!important;
-  height:100%!important;
-}
+

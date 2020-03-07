@@ -5,7 +5,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import MapIcon from '@material-ui/icons/Map'
 import ChatIcon from '@material-ui/icons/Chat';
 import PersonIcon from '@material-ui/icons/Person';
-import Account from '../screens/Account/Account'
+import Account from '../screens/Account/UserPanel'
 import {Link, useHistory} from 'react-router-dom'
 const useStyles = makeStyles({
     root: {

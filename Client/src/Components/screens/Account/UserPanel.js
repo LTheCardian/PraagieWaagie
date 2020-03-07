@@ -151,6 +151,7 @@ class UserPanel extends React.Component{
                                     circular
                                     onClick={this.openModal}
                                     className="avatar-image"
+                                    size="small"
                                 /> 
                                 <p className="avatar-text" onClick={this.openModal}>Change avatar</p>
                             </Grid.Column>
