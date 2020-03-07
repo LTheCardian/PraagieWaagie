@@ -135,21 +135,22 @@ class UserPanel extends React.Component{
         return(
             <Grid>
                 <Grid.Column>
-                    <Grid.Row style={{paddingTop:"1.2em"}}>
+                    <Grid.Row textAlign="center"style={{paddingTop:"1.2em"}}>
                         <Header inverted floated="left">
                             <Link className="no" to="/"><Icon name="arrow left"/></Link>
                             <Header.Content>User Settings</Header.Content>
                         </Header>
-                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" size="large"/>
+                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" floated="right" size="large"/>
                     </Grid.Row>
                     <React.Fragment>
                         <Grid.Row>
                             <Grid.Column>
                                 <Image
                                     src={user.photoURL}
-                                    size="small"
+                                    wrapped
                                     circular
                                     onClick={this.openModal}
+                                    className="avatar-image"
                                 /> 
                                 <p className="avatar-text" onClick={this.openModal}>Change avatar</p>
                             </Grid.Column>
