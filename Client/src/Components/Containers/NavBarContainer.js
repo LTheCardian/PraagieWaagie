@@ -31,7 +31,7 @@ export default function NavBarContainer() {
               style={{width:"100%", overflow:"hidden", position:"fixed", bottom:"0", right:'0', left:'0'}}
       >
         <BottomNavigationAction label="Map" icon={<MapIcon />} />
-        <BottomNavigationAction label="Chat" icon={<ChatIcon />} />
+        <BottomNavigationAction label="Chat" onClick={() => history.push("/uwu")} icon={<ChatIcon />} />
         <BottomNavigationAction label="Account" fontSize="large" onClick={() => history.push('/omae')} icon={<PersonIcon />}/>
       </BottomNavigation>
     );

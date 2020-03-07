@@ -45,3 +45,336 @@ body{
 }
 
 
+/* Plain HTML styles */
+html,
+body,
+.app {
+  height: 100vh;
+  padding: 1em;
+  background: #1b1c1d;
+}
+
+link {
+  vertical-align: middle;
+  text-align: center;
+}
+
+li {
+  text-decoration: none;
+}
+
+ul {
+  text-decoration: none;
+}
+/* End Plain HTML styles */
+
+/* ### Section Messages */
+/* MessageForm.js */
+.message__form {
+  position: fixed !important;
+  bottom: 0.3em;
+  margin-left: 320px !important;
+  left: 0;
+  right: 1em;
+  z-index: 180;
+  background-color: #1b1c1d !important;
+}
+/* end MessageForm.js */
+
+/* Messages.js */
+.messages {
+  height: 66vh;
+  overflow-y: scroll;
+  max-width: 1200px !important;
+}
+/* end Messages.js */
+
+/* Message.js */
+.message__self {
+  border-left: 2px solid orange;
+  padding-left: 8px;
+}
+
+.message__image {
+  padding: 1em;
+  max-width: 400px !important;
+}
+/* end Message.js */
+
+/* emoji */
+.emoijpicker {
+  position: absolute;
+}
+/* end emoji */
+
+/* Typing.js */
+.user__typing {
+  font-style: italic;
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.typing {
+  width: 5em;
+  height: 2em;
+  position: relative;
+  padding: 10px;
+  margin-left: 5px;
+  background: #e6e6e6;
+  border-radius: 20px;
+}
+
+.typing__dot {
+  float: left;
+  width: 8px;
+  height: 8px;
+  margin: 0 4px;
+  background: #8d8c91;
+  border-radius: 50%;
+  opacity: 0;
+  animation: loadingFade 1s infinite;
+}
+
+.typing__dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing__dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing__dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+/* end typing.js */
+/* ### End Section Messages */
+
+/* ### Section Layout */
+/* Layout Styles */
+.inner,
+.main-content {
+  width: 90%;
+  max-width: 1025px;
+  margin: auto;
+  padding-left: 350px;
+}
+
+.main-header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  min-height: 80px;
+  z-index: 1000;
+}
+
+.main-content::after {
+  content: " ";
+  display: table;
+  clear: both;
+}
+
+.is-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.wrapper {
+  text-align: center;
+}
+/* End Layout Styles */
+
+/* SidePanel.js */
+.menu {
+  padding-bottom: 2em;
+}
+.white {
+  color: white !important;
+}
+/* End SidePanel.js */
+
+/* ProgressBar.js */
+.progress__bar {
+  margin: 0.3em 0 0 0 !important;
+}
+/* end ProgressBar.js */
+
+/* Text Styles */
+.big {
+  font-size: 32px !important;
+  vertical-align: middle;
+}
+
+.warning {
+  position: absolute;
+  top: 25%;
+}
+
+.centered {
+  text-align: center !important;
+}
+
+.main-title {
+  font-size: 1.4em;
+  line-height: 80px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+/* End Text Styles */
+
+/* Image Styles */
+/* End Image Styles */
+/* ### End Section Layout */
+
+/* ### USER SECTION */
+.span-userpanel:hover {
+  cursor: pointer;
+}
+
+.menuUserpanel {
+  overflow-y: auto;
+}
+
+.setting-user:hover {
+  cursor: pointer;
+}
+/* ### END USER SECTION */
+
+/* ### Section Links */
+.link-app {
+  color: black;
+  text-decoration: none;
+}
+
+.link-app:visited {
+  color: black;
+}
+
+.link-app:hover {
+  cursor: pointed;
+  color: black;
+  text-decoration: underline;
+}
+
+.link-chat {
+  color: black;
+}
+
+.link-chat:visited {
+  color: black;
+}
+
+.link-chat:hover {
+  color: black;
+  text-decoration: underline;
+}
+/* ### End Section Links */
+
+/* ### Section KeyFrames */
+/* Keyframes LoadingFade */
+@keyframes loadingFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+/* End Keyframes LoadingFade */
+/* ### End Section KeyFrames */
+
+/* ### Section Onzin */
+.hahaxd:visited {
+  color: white;
+}
+
+.hahaxd:hover {
+  color: white;
+}
+
+.lmao {
+  font-weight: bold;
+}
+
+.lmao:hover {
+  text-decoration: underline;
+  color: gray;
+  cursor: pointer;
+}
+
+.hehexd {
+  font-size: 16px;
+}
+
+.hehexd:hover {
+  color: black;
+  text-decoration: underline;
+  cursor: pointer;
+}
+/* ### End Section Onzin */
+
+/* ### Section UI */
+.add-icon:hover {
+  cursor: pointer;
+}
+
+.search-form input:only-of-type {
+  width: 100%;
+  margin-right: -40px;
+  padding-right: 35px;
+}
+
+.search-button {
+  float: right;
+  margin-right: -10px;
+}
+
+.icn-search {
+  font-weight: 700;
+}
+
+.icon-gif {
+  font-size: 6em;
+  margin-bottom: 0;
+  color: #7bcbc4;
+  display: block;
+}
+
+.avatar-us {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+  border-radius: 5%;
+}
+.avatar-us:hover,
+.avatar-us:focus,
+.avatar-us:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.label_username {
+  color: rgb(141, 142, 142);
+  padding-left: 0px;
+  margin-left: 0px;
+  line-height: 1.8;
+}
+/* ### End Section UI */
