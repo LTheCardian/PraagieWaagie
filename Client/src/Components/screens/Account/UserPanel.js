@@ -5,6 +5,7 @@ import {Grid, Header, Icon, Image,Form, Button, Input, Message, Modal} from 'sem
 import {Link, useHistory} from 'react-router-dom'
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
+import { Provider } from 'react-redux'
 class UserPanel extends React.Component{
     state={
         user:firebase.auth().currentUser,
@@ -170,6 +171,8 @@ class UserPanel extends React.Component{
                                         <br/>
                                         <br/>
                                         Provider:
+                                        <br/>
+                                        {user.providerData[0].providerId}
                                     </Header.Content>
                                 </Header>
                                 <Button onClick={this.openReset}>Change password</Button>
