@@ -5,7 +5,9 @@ import {connect} from 'react-redux'
 import UserPanel from './UserPanel'
 
 const Account = ({currentUser}) =>(
-    <UserPanel key={currentUser && currentUser.uid} currentUser={currentUser}/>
+    <Grid column="equal" className="app">
+        <UserPanel key={currentUser && currentUser.uid} currentUser={currentUser}/>
+    </Grid>
 )
 
 const mapStateToProps = state =>({
