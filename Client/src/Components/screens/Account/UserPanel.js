@@ -5,6 +5,7 @@ import {Grid, Header, Icon, Image,Form, Button, Input, Message, Modal} from 'sem
 import {Link, useHistory} from 'react-router-dom'
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
+import { Provider } from 'react-redux'
 class UserPanel extends React.Component{
     state={
         user:firebase.auth().currentUser,
@@ -31,6 +32,13 @@ class UserPanel extends React.Component{
     closeReset = () => this.setState({reset:false})
     openOpen = () => this.setState({open:true})
     closeOpen = () => this.setState({open:false})
+
+
+    componentDidMount(){
+        console.log(this.state.user)
+    }
+
+
     uploadCroppedImage =() =>{
         const {storageRef, userRef, blob, metadata} = this.state
         
@@ -127,21 +135,22 @@ class UserPanel extends React.Component{
         return(
             <Grid>
                 <Grid.Column>
-                    <Grid.Row style={{paddingTop:"1.2em"}}>
+                    <Grid.Row textAlign="center"style={{paddingTop:"1.2em"}}>
                         <Header inverted floated="left">
                             <Link className="no" to="/"><Icon name="arrow left"/></Link>
                             <Header.Content>User Settings</Header.Content>
                         </Header>
-                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" size="large"/>
+                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" floated="right" size="large"/>
                     </Grid.Row>
                     <React.Fragment>
                         <Grid.Row>
                             <Grid.Column>
                                 <Image
                                     src={user.photoURL}
-                                    size="small"
+                                    wrapped
                                     circular
                                     onClick={this.openModal}
+                                    className="avatar-image"
                                 /> 
                                 <p className="avatar-text" onClick={this.openModal}>Change avatar</p>
                             </Grid.Column>
@@ -155,6 +164,16 @@ class UserPanel extends React.Component{
                                         User name:
                                         <br/>
                                         {user.displayName}
+                                        <br/>
+                                        <br/>
+                                        Email:
+                                        <br/>
+                                        {user.email}
+                                        <br/>
+                                        <br/>
+                                        Provider:
+                                        <br/>
+                                        {user.providerData[0].providerId}
                                     </Header.Content>
                                 </Header>
                                 <Button onClick={this.openReset}>Change password</Button>

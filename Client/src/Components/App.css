@@ -3,9 +3,8 @@ body,
 .app{
   height:100vh;
   padding:1em;
-  background:#1b1c1d;
-  overflow: hidden;
-  color:white
+  background-color:#1b1c1d!important;
+  overflow: hidden!important;
 }
 body{
   position:relative;
@@ -23,23 +22,33 @@ body{
 
 .sign_out_icon{
   float:right;
+  color:white;
 }
 
-.right{
+/* .right{
   float:right;
-}
+} */
 
 .header-name{
   padding-top:25px!important;
 }
 
 .avatar-text{
-  padding-left:30px!important;
+  padding-left:50px!important;
   text-decoration: underline;
   color:lightblue;
 }
 
 .grid-name{
-  color:white!important;
-  padding-top:50px!important;
+  color:#1b1c1d!important;
+  padding-top:25px!important;
+}
+
+.avatar-image{
+  position: relative!important;
+  overflow:hidden!important;
+  max-width:200px!important;
+  width:100%!important;
+  max-height:200px!important;
+  height:100%!important;
 }
