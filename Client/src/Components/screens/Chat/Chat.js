@@ -6,7 +6,7 @@ import Messages from './Messages/Messages'
 
 const Chat = ({currentUser, currentChannel, isPrivateChannel}) => (
     <Grid columns="equal" className="app" style={{background:"#1b1c1d"}}>
-        <Grid.Column style={{marginLeft: 100}}>
+        <Grid.Column>
             <Messages
                 key={currentChannel && currentChannel.id}
                 currentChannel={currentChannel}
