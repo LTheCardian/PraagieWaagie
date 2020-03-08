@@ -2,9 +2,9 @@ html,
 body,
 .app{
   height:100vh;
-  padding:1em;
   background-color:#1b1c1d!important;
   overflow: hidden!important;
+  padding:0.5em;
 }
 body{
   position:relative;
