@@ -3,7 +3,9 @@ import firebase from '../../../firebase'
 import AvatarEditor from 'react-avatar-editor'
 import {Grid, Header, Icon, Image,Form, Button, Input, Message, Modal} from 'semantic-ui-react'
 import {Link, useHistory} from 'react-router-dom'
-
+import Snackbar from '@material-ui/core/Snackbar'
+import Alert from '@material-ui/lab/Alert'
+import { Provider } from 'react-redux'
 class UserPanel extends React.Component{
     state={
         user:firebase.auth().currentUser,
@@ -19,6 +21,7 @@ class UserPanel extends React.Component{
         auth:firebase.auth(),
         reset:false,
         email:"",
+        open:false,
         metadata:{
             contentType: "image/png"
         }
@@ -27,6 +30,14 @@ class UserPanel extends React.Component{
     closeModal = () => this.setState({modal:false})
     openReset = () => this.setState({reset:true})
     closeReset = () => this.setState({reset:false})
+    openOpen = () => this.setState({open:true})
+    closeOpen = () => this.setState({open:false})
+
+
+    componentDidMount(){
+        console.log(this.state.user)
+    }
+
 
     uploadCroppedImage =() =>{
         const {storageRef, userRef, blob, metadata} = this.state
@@ -99,7 +110,15 @@ class UserPanel extends React.Component{
 
     handleResetPassword = event =>{
         event.preventDefault()
-        this.state.auth.sendPasswordResetEmail(this.state.email)
+        this.state.auth.sendPasswordResetEmail(this.state.email).then(()=>{
+            this.setState({open:true})
+        }).catch(err =>{
+            console.error(err)
+        }).then(()=>{
+            this.setState({reset:false})
+        }).catch(err =>{
+            console.error(err)
+        })
     }
 
     handleSignout = () => firebase.auth().signOut()
@@ -116,21 +135,23 @@ class UserPanel extends React.Component{
         return(
             <Grid>
                 <Grid.Column>
-                    <Grid.Row style={{paddingTop:"1.2em"}}>
+                    <Grid.Row textAlign="center"style={{paddingTop:"1.2em"}}>
                         <Header inverted floated="left">
                             <Link className="no" to="/"><Icon name="arrow left"/></Link>
                             <Header.Content>User Settings</Header.Content>
                         </Header>
-                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" size="large"/>
+                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" floated="right" size="large"/>
                     </Grid.Row>
                     <React.Fragment>
                         <Grid.Row>
                             <Grid.Column>
                                 <Image
                                     src={user.photoURL}
-                                    size="small"
+                                    wrapped
                                     circular
                                     onClick={this.openModal}
+                                    className="avatar-image"
+                                    size="small"
                                 /> 
                                 <p className="avatar-text" onClick={this.openModal}>Change avatar</p>
                             </Grid.Column>
@@ -144,6 +165,16 @@ class UserPanel extends React.Component{
                                         User name:
                                         <br/>
                                         {user.displayName}
+                                        <br/>
+                                        <br/>
+                                        Email:
+                                        <br/>
+                                        {user.email}
+                                        <br/>
+                                        <br/>
+                                        Provider:
+                                        <br/>
+                                        {user.providerData[0].providerId}
                                     </Header.Content>
                                 </Header>
                                 <Button onClick={this.openReset}>Change password</Button>
@@ -196,11 +227,11 @@ class UserPanel extends React.Component{
                                     <Icon name="save"/> Change avatar
                                 </Button>
                             )}
-                            <Button color="green" inverted onClick={this.handleCropImage}>
-                                <Icon name="image" /> Preview
-                            </Button>
                             <Button color="red" inverted onClick={this.closeModal}>
                                 <Icon name="remove" /> Cancel
+                            </Button>
+                            <Button color="green" inverted onClick={this.handleCropImage}>
+                                <Icon name="image" /> Preview
                             </Button>
                         </Modal.Actions>
                     </Modal>
@@ -230,6 +261,11 @@ class UserPanel extends React.Component{
                             </Form>
                         </Modal.Content>
                     </Modal>
+                    <Snackbar open={this.state.open} autoHideDuration={3000} onClose={this.closeOpen}>
+                        <Alert onClose={this.closeOpen} severity="success">
+                            Email send!
+                        </Alert>
+                    </Snackbar>
                 </Grid.Column>
             </Grid>
         )

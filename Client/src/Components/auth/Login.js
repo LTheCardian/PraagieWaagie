@@ -10,6 +10,8 @@ import {
     Label,
     Modal
 } from 'semantic-ui-react'
+import Snackbar from '@material-ui/core/Snackbar'
+import Alert from '@material-ui/lab/Alert'
 import {Link} from 'react-router-dom'
 import ParticleContainer from '../Containers/ParticleContainer'
 export default class Login extends React.Component{
@@ -20,6 +22,7 @@ export default class Login extends React.Component{
         reset:false,
         loading:false,
         auth:firebase.auth(),
+        open:false,
         usersRef:firebase.database().ref("users"),
         user: firebase.auth().currentUser,
         provider: new firebase.auth.GoogleAuthProvider()
@@ -34,18 +37,22 @@ export default class Login extends React.Component{
         event.preventDefault()
         this.state.auth.sendPasswordResetEmail(this.state.email).then(() =>{
             console.log('Email send')
+            this.setState({open:true})
         }).catch(error =>{
             console.log(error)
         }).then(()=>{
-            alert('Password reset email send')
-        }).catch(error =>{
-            console.error(error)
+            this.setState({reset:false})
+        }).catch(err=>{
+            console.error(err)
         })
     }
 
     openReset = () => this.setState({reset:true})
     closeReset =() => this.setState({reset:false})
+    openOpen = () => this.setState({open:true})
+    closeOpen = () => this.setState({open:false})
 
+    
     handleSubmit = event =>{
         event.preventDefault()
         if(this.isFormValid(this.state)){
@@ -75,7 +82,7 @@ export default class Login extends React.Component{
     }
 
     logInGoogle= ()=>{
-        firebase.auth().signInWithRedirect(this.state.provider)
+        firebase.auth().signInWithPopup(this.state.provider)
         .then((result) =>{
             if(result.credential){
                 const token = result.credential.accessToken
@@ -163,6 +170,11 @@ export default class Login extends React.Component{
                             </Form>
                         </Modal.Content>
                     </Modal>
+                    <Snackbar open={this.state.open} autoHideDuration={3000} onClose={this.closeOpen}>
+                        <Alert onClose={this.closeOpen} severity="success">
+                            Email send!
+                        </Alert>
+                    </Snackbar>
                     </Grid.Column>
                 </Grid>
             </div>
