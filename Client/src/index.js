@@ -4,15 +4,15 @@ import firebase from './firebase'
 import App from './Components/App'
 import {
     BrowserRouter as Router,
-    Switch, 
+    Switch,
     Route,
     withRouter
 } from 'react-router-dom'
 import * as ServiceWorker from './serviceWorker'
-import {createStore} from 'redux'
-import {Provider, connect} from 'react-redux'
+import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
 import rootReducer from './reducers'
-import {setUser, clearUser} from './actions'
+import { setUser, clearUser } from './actions'
 import Spinner from './Spinner'
 import Login from './Components/auth/Login'
 import "semantic-ui-css/semantic.min.css";
@@ -21,13 +21,13 @@ import Account from './Components/screens/Account/Account'
 import Chat from './Components/screens/Chat/Chat'
 import MiniGames from './Components/screens/Minigames/MiniGames'
 const store = createStore(rootReducer)
-class Root extends React.Component{
-    componentDidMount(){
-        firebase.auth().onAuthStateChanged(user =>{
-            if(user){
+class Root extends React.Component {
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
                 this.props.setUser(user)
-                this.props.history.push('/minigames')
-            }else{
+                this.props.history.push('/')
+            } else {
                 this.props.history.push('/owo')
                 this.props.clearUser()
             }
@@ -35,37 +35,37 @@ class Root extends React.Component{
     }
 
 
-    render(){
+    render() {
         return this.props.isLoading ? (
             <Spinner />
         ) : (
-            <Switch>
-                <Route exact path="/" component={App}/>
-                <Route path="/owo" component={Login} />
-                <Route path="/umu" component={Register}/>
-                <Route path="/omae" component={Account}/>
-                <Route path="/uwu" component={Chat}/>
-                <Route path='/minigames' component={MiniGames}/>
-            </Switch>
-        )
+                <Switch>
+                    <Route exact path="/" component={App} />
+                    <Route path="/owo" component={Login} />
+                    <Route path="/umu" component={Register} />
+                    <Route path="/omae" component={Account} />
+                    <Route path="/uwu" component={Chat} />
+                    <Route path='/minigames' component={MiniGames} />
+                </Switch>
+            )
     }
 }
 
-const mapStateFromProps = state =>({
+const mapStateFromProps = state => ({
     isLoading: state.user.isLoading
-}) 
+})
 
-const RootWithAuth = withRouter (
+const RootWithAuth = withRouter(
     connect(
         mapStateFromProps,
-        {setUser, clearUser}
+        { setUser, clearUser }
     )(Root)
 )
 
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <RootWithAuth/>
+            <RootWithAuth />
         </Router>
     </Provider>,
     document.getElementById('root')
