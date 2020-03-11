@@ -1,9 +1,10 @@
 import React from 'react'
+import Memory from "./Memory/main";
 
-class MiniGames extends React.Component{
-    render(){
-        return(
-            <p>Hi</p>
+class MiniGames extends React.Component {
+    render() {
+        return (
+            <Memory />
         )
     }
 }
