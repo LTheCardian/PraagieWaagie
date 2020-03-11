@@ -172,7 +172,7 @@ class UserPanel extends React.Component{
                                         {user.email}
                                         <br/>
                                         <br/>
-                                        Provider:
+                                        :
                                         <br/>
                                         {user.providerData[0].providerId}
                                     </Header.Content>
