@@ -19,13 +19,14 @@ import "semantic-ui-css/semantic.min.css";
 import Register from './Components/auth/Register'
 import Account from './Components/screens/Account/Account'
 import Chat from './Components/screens/Chat/Chat'
+import MiniGames from './Components/screens/Minigames/MiniGames'
 const store = createStore(rootReducer)
 class Root extends React.Component{
     componentDidMount(){
         firebase.auth().onAuthStateChanged(user =>{
             if(user){
                 this.props.setUser(user)
-                this.props.history.push('/')
+                this.props.history.push('/minigames')
             }else{
                 this.props.history.push('/owo')
                 this.props.clearUser()
@@ -44,6 +45,7 @@ class Root extends React.Component{
                 <Route path="/umu" component={Register}/>
                 <Route path="/omae" component={Account}/>
                 <Route path="/uwu" component={Chat}/>
+                <Route path='/minigames' component={MiniGames}/>
             </Switch>
         )
     }
