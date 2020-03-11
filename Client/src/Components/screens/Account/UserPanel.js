@@ -1,61 +1,61 @@
 import React from 'react'
 import firebase from '../../../firebase'
 import AvatarEditor from 'react-avatar-editor'
-import {Grid, Header, Icon, Image,Form, Button, Input, Message, Modal} from 'semantic-ui-react'
-import {Link, useHistory} from 'react-router-dom'
+import { Grid, Header, Icon, Image, Form, Button, Input, Message, Modal } from 'semantic-ui-react'
+import { Link, useHistory } from 'react-router-dom'
 import Snackbar from '@material-ui/core/Snackbar'
 import Alert from '@material-ui/lab/Alert'
 import { Provider } from 'react-redux'
-class UserPanel extends React.Component{
-    state={
-        user:firebase.auth().currentUser,
-        usersRef:firebase.database().ref("users"),
+class UserPanel extends React.Component {
+    state = {
+        user: firebase.auth().currentUser,
+        usersRef: firebase.database().ref("users"),
         storageRef: firebase.storage().ref(),
-        modal:false,
-        uploadedCroppedImage:"",
-        previewImage:"",
-        croppedImage:"",
+        modal: false,
+        uploadedCroppedImage: "",
+        previewImage: "",
+        croppedImage: "",
         currentUser: this.props.currentUser,
         userRef: firebase.auth().currentUser,
-        blob:null,
-        auth:firebase.auth(),
-        reset:false,
-        email:"",
-        open:false,
-        metadata:{
+        blob: null,
+        auth: firebase.auth(),
+        reset: false,
+        email: "",
+        open: false,
+        metadata: {
             contentType: "image/png"
         }
-    }     
-    openModal = () => this.setState({modal:true})
-    closeModal = () => this.setState({modal:false})
-    openReset = () => this.setState({reset:true})
-    closeReset = () => this.setState({reset:false})
-    openOpen = () => this.setState({open:true})
-    closeOpen = () => this.setState({open:false})
+    }
+    openModal = () => this.setState({ modal: true })
+    closeModal = () => this.setState({ modal: false })
+    openReset = () => this.setState({ reset: true })
+    closeReset = () => this.setState({ reset: false })
+    openOpen = () => this.setState({ open: true })
+    closeOpen = () => this.setState({ open: false })
 
 
-    componentDidMount(){
+    componentDidMount() {
         console.log(this.state.user)
     }
 
 
-    uploadCroppedImage =() =>{
-        const {storageRef, userRef, blob, metadata} = this.state
-        
+    uploadCroppedImage = () => {
+        const { storageRef, userRef, blob, metadata } = this.state
+
         storageRef
             .child(`avatars/users/${userRef.uid}`)
             .put(blob, metadata)
 
-            .then(snap =>{
-                snap.ref.getDownloadURL().then(downloadURL =>{
-                    this.setState({uploadedCroppedImage:downloadURL}, () => 
+            .then(snap => {
+                snap.ref.getDownloadURL().then(downloadURL => {
+                    this.setState({ uploadedCroppedImage: downloadURL }, () =>
                         this.changeAvatar()
                     )
                 })
             })
-    }   
+    }
 
-    changeAvatar = () =>{
+    changeAvatar = () => {
         this.state.userRef
             .updateProfile({
                 photoURL: this.state.uploadedCroppedImage
@@ -104,43 +104,43 @@ class UserPanel extends React.Component{
         }
     }
 
-    handleEventChange = event =>{
-        this.setState({ [event.target.name]: event.target.value})
+    handleEventChange = event => {
+        this.setState({ [event.target.name]: event.target.value })
     }
 
-    handleResetPassword = event =>{
+    handleResetPassword = event => {
         event.preventDefault()
-        this.state.auth.sendPasswordResetEmail(this.state.email).then(()=>{
-            this.setState({open:true})
-        }).catch(err =>{
+        this.state.auth.sendPasswordResetEmail(this.state.email).then(() => {
+            this.setState({ open: true })
+        }).catch(err => {
             console.error(err)
-        }).then(()=>{
-            this.setState({reset:false})
-        }).catch(err =>{
+        }).then(() => {
+            this.setState({ reset: false })
+        }).catch(err => {
             console.error(err)
         })
     }
 
     handleSignout = () => firebase.auth().signOut()
-    render(){
-        const{
+    render() {
+        const {
             user,
             history,
             modal,
             previewImage,
-            croppedImage, 
+            croppedImage,
             currentUser
         } = this.state
 
-        return(
+        return (
             <Grid>
                 <Grid.Column>
-                    <Grid.Row textAlign="center"style={{paddingTop:"1.2em"}}>
+                    <Grid.Row textAlign="center" style={{ paddingTop: "1.2em" }}>
                         <Header inverted floated="left">
-                            <Link className="no" to="/"><Icon name="arrow left"/></Link>
+                            <Link className="no" to="/"><Icon name="arrow left" /></Link>
                             <Header.Content>User Settings</Header.Content>
                         </Header>
-                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" floated="right" size="large"/>
+                        <Icon name="sign-out" onClick={this.handleSignout} className="sign_out_icon" floated="right" size="large" />
                     </Grid.Row>
                     <React.Fragment>
                         <Grid.Row>
@@ -152,7 +152,7 @@ class UserPanel extends React.Component{
                                     onClick={this.openModal}
                                     className="avatar-image"
                                     size="small"
-                                /> 
+                                />
                                 <p className="avatar-text" onClick={this.openModal}>Change avatar</p>
                             </Grid.Column>
                         </Grid.Row>
@@ -163,24 +163,24 @@ class UserPanel extends React.Component{
                                 <Header inverted>
                                     <Header.Content>
                                         User name:
-                                        <br/>
+                                        <br />
                                         {user.displayName}
-                                        <br/>
-                                        <br/>
+                                        <br />
+                                        <br />
                                         Email:
-                                        <br/>
+                                        <br />
                                         {user.email}
-                                        <br/>
-                                        <br/>
-                                        :
-                                        <br/>
+                                        <br />
+                                        <br />
+                                        Provider:
+                                        <br />
                                         {user.providerData[0].providerId}
                                     </Header.Content>
                                 </Header>
                                 <Button onClick={this.openReset}>Change password</Button>
                             </Grid.Column>
                         </Grid.Row>
-                    </React.Fragment> 
+                    </React.Fragment>
                     <Modal open={modal} onClose={this.closeModal} closeIcon>
                         <Modal.Header>Change avatar</Modal.Header>
                         <Modal.Content>
@@ -207,7 +207,7 @@ class UserPanel extends React.Component{
                                     <Grid.Column>
                                         {croppedImage && (
                                             <Image
-                                                style={{margin: "3.5em auto"}}
+                                                style={{ margin: "3.5em auto" }}
                                                 width={200}
                                                 height={200}
                                                 src={croppedImage}
@@ -219,12 +219,12 @@ class UserPanel extends React.Component{
                         </Modal.Content>
                         <Modal.Actions>
                             {croppedImage && (
-                                <Button 
+                                <Button
                                     color="green"
-                                    inverted 
+                                    inverted
                                     onClick={this.uploadCroppedImage}
                                 >
-                                    <Icon name="save"/> Change avatar
+                                    <Icon name="save" /> Change avatar
                                 </Button>
                             )}
                             <Button color="red" inverted onClick={this.closeModal}>
@@ -251,7 +251,7 @@ class UserPanel extends React.Component{
                                     type="email"
                                     iconPosition="left"
                                 />
-                                <Button 
+                                <Button
                                     color="grey"
                                     fluid
                                     size="large"
