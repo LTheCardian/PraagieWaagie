@@ -1,0 +1,26 @@
+{
+  "name": "realtime-position-tracking",
+  "version": "1.0.0",
+  "description": "Glu-praag-location",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "glu",
+    "live-map",
+    "Leaflet",
+    "mapbox"
+  ],
+  "author": "Bart, Hidde en Michael",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "socket.io": "^2.0.3",
+    "dotenv":"8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
