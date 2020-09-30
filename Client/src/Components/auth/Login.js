@@ -22,6 +22,7 @@ export default class Login extends React.Component {
     reset: false,
     loading: false,
     auth: firebase.auth(),
+    mexican: true,
     open: false,
     usersRef: firebase.database().ref("users"),
     user: firebase.auth().currentUser,
